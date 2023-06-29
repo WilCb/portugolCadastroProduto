@@ -2,15 +2,16 @@ programa {
 	inclua biblioteca Matematica --> mat
 	inclua biblioteca Arquivos --> a
 	inclua biblioteca Calendario --> cal
+	inclua biblioteca Texto --> t
+	inclua biblioteca Util --> u
 	funcao inicio() {
-		real valorProduto, maiorValor = 0.0, menorValor = 0.0, somaProdutos = 0.0
+		real valorProduto, valoresProdutos[50], maiorValor = 0.0, menorValor = 0.0, somaProdutos = 0.0
 		inteiro i, cadastroProduto
-		cadeia nomeProduto[50]
-		real valoresProdutos[50]
-    
+		cadeia nomeProduto[50], lista
+
 		//apresentação do sistema
 		escreveLinha(verdadeiro)
-		escreva("-------------------CADASTRO DE PRODUTOS DA OFICINA-------------------\n\n")
+		escreva(t.caixa_alta("-------------------cadastro de produtos da oficina-------------------\n\n"))
 		escreveLinha(verdadeiro)
 		
 		//cadastra a qtd de produtos
@@ -26,7 +27,7 @@ programa {
 			escreva("Preço do produto: R$")
 			leia(valorProduto)
 			escreveLinha(verdadeiro)
-
+			limpa()
 			valoresProdutos[i] = valorProduto
 		//busca o maior e menor valor
 			se (i == 0) {
@@ -41,11 +42,14 @@ programa {
 			}
 		//soma o valor dos produtos cadastrados
 		somaProdutos = somaProdutos + valorProduto
+		lista = nomeProduto[i]
 		}
   
 		//limpa a tela anterior de cadastro e Gera o relatorio
 		limpa()
-		
+		escreva("Aguarde, Gerando relatorio...")
+		u.aguarde(3000)
+		limpa()
 		escreveLinha(verdadeiro)
 		escreva("-------------------RELATÓRIO-------------------\n\n")
 		escreva("DATA DO RELATÓRIO: ", cal.dia_mes_atual()," / ", cal.mes_atual(), " / ", cal.ano_atual()," HORARIO DO RELATÓRIO: ", cal.hora_atual(falso), ":", cal.minuto_atual())
@@ -64,14 +68,12 @@ programa {
 		escreva("-------------------Detalhes dos Produtos-------------------\n\n")
 		escreveLinha(verdadeiro)
 		
-		//mostra o produto e seu valor cadastrado
+		//mostra os produtos e valores
 		para (i = 0; i < cadastroProduto; i++) {
-			escreva("Produto: " + nomeProduto[i])
-			escreva("\nValor: R$" + valoresProdutos[i])
-			escreveLinha(verdadeiro)
+			escreva("\nProduto: " + nomeProduto[i] + "\t|\tValor: R$" + valoresProdutos[i] + "\n-\n")
 		}
 		//mostra o valor total de todos os produtos
-		escreva("Soma de todos os produtos cadastrados R$" + mat.arredondar(somaProdutos, 0))
+		escreva("\n\nSoma de todos os produtos cadastrados R$" + mat.arredondar(somaProdutos, 1))
   		escreveLinha(falso)
   		//*******CRIAR RELATORIO .TXT*******
   		inteiro arquivo = a.abrir_arquivo("./relatorio", a.MODO_ESCRITA)
@@ -115,7 +117,7 @@ programa {
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 3973; 
+ * @POSICAO-CURSOR = 1452; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
